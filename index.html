@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alif Ahmed Alvi fm | Personal Site</title>
+  <meta name="description" content="A premium personal website for Alif Ahmed Alvi fm with media upload and elegant design." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-glow glow-1"></div>
+  <div class="background-glow glow-2"></div>
+
+  <main class="container">
+    <section class="hero-card">
+      <div class="text-block">
+        <p class="eyebrow">Personal Site</p>
+        <h1>Alif Ahmed Alvi fm</h1>
+        <p class="tagline">
+          A timeless digital identity crafted with elegance, purpose, and the power to keep your story alive.
+        </p>
+
+        <div class="cta-row">
+          <a href="#media" class="btn primary">Upload Media</a>
+          <a href="#about" class="btn secondary">Discover More</a>
+          <a href="/admin" class="btn secondary">Admin Panel</a>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-pill">
+            <strong>01</strong>
+            <span>Signature identity</span>
+          </div>
+          <div class="stat-pill">
+            <strong>24/7</strong>
+            <span>Online presence</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-badge">LIVE</div>
+        <div class="avatar-wrap">
+          <img id="profileImage" class="profile-photo" alt="Profile" />
+          <div id="avatarFallback" class="avatar">AA</div>
+        </div>
+        <h2>Personal Identity</h2>
+        <p>An elegant digital space for memories, milestones, and media.</p>
+      </div>
+    </section>
+
+    <section id="about" class="info-grid">
+      <article class="info-card">
+        <h3>About This Space</h3>
+        <p>
+          This personal website is designed to reflect a polished identity with a modern glassmorphism look,
+          immersive background, and a memorable visual presence.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h3>Media Upload</h3>
+        <p>
+          You can upload photos and videos directly from your device to preview them here. For permanent online storage,
+          a backend service such as Supabase or Firebase can be added next.
+        </p>
+      </article>
+    </section>
+
+    <section id="showcase" class="showcase-grid">
+      <article class="showcase-card">
+        <h3>Designed for Lifelong Presence</h3>
+        <p>A meaningful identity that can accompany you for years, shaped as a clean and trusted personal web asset.</p>
+      </article>
+      <article class="showcase-card">
+        <h3>Elegant Visual Language</h3>
+        <p>Soft lighting, layered gradients, and refined contrast make the page feel premium and calm.</p>
+      </article>
+    </section>
+
+    <section id="gallery" class="upload-card">
+      <div class="upload-header">
+        <h3>Live Media Gallery</h3>
+        <span>Server-backed uploads</span>
+      </div>
+      <div id="galleryGrid" class="preview-grid"></div>
+    </section>
+
+    <section id="media" class="upload-card">
+      <div class="upload-header">
+        <h3>Upload Photo or Video</h3>
+        <span id="fileCount">No files selected</span>
+      </div>
+
+      <label class="upload-box" id="uploadBox" for="mediaUpload">
+        <input id="mediaUpload" type="file" accept="image/*,video/*" multiple />
+        <div class="upload-text">
+          <strong>Choose files or drag them here</strong>
+          <span>Upload images or videos to preview them instantly</span>
+        </div>
+      </label>
+
+      <div id="previewGrid" class="preview-grid"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

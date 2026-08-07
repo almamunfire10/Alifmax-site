@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Alif Ahmed Alvi fm</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #061322, #0b1730);
+      color: #f4f7fb;
+      padding: 24px;
+    }
+    .container {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      background: rgba(11, 25, 47, 0.78);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    h1 { margin-top: 0; }
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .toolbar a {
+      text-decoration: none;
+      color: #061322;
+      background: linear-gradient(90deg, #75e6ff, #9a7cff);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    form {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.04);
+      color: #f4f7fb;
+    }
+    button {
+      width: fit-content;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #75e6ff, #9a7cff);
+      color: #041423;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .card img, .card video {
+      width: 100%;
+      display: block;
+      max-height: 240px;
+      object-fit: cover;
+    }
+    .label {
+      padding: 10px 12px;
+      color: #b9c3d4
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="toolbar">
+      <h1>Mobile Admin Dashboard</h1>
+      <a href="/logout">Logout</a>
+    </div>
+
+    <p>Use this dashboard from your phone or any browser to manually upload photos/videos.</p>
+
+    <form action="/upload-profile" method="POST" enctype="multipart/form-data">
+      <label>Profile picture</label>
+      <input type="file" name="profileImage" accept="image/*" />
+      <button type="submit">Set Profile Picture</button>
+    </form>
+
+    <form action="/upload-background" method="POST" enctype="multipart/form-data">
+      <label>Background image</label>
+      <input type="file" name="backgroundImage" accept="image/*" />
+      <button type="submit">Set Background Image</button>
+    </form>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <label>Gallery media</label>
+      <input type="file" name="files" multiple accept="image/*,video/*" />
+      <button type="submit">Upload to Site</button>
+    </form>
+
+    <div id="mediaGrid" class="grid"></div>
+  </div>
+
+  <script>
+    async function loadFiles() {
+      const res = await fetch('/api/files');
+      const files = await res.json();
+      const grid = document.getElementById('mediaGrid');
+      grid.innerHTML = '';
+
+      files.forEach((file) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = file.name;
+
+        if (file.url.match(/\.(png|jpe?g|gif|webp|bmp)$/i)) {
+          const img = document.createElement('img');
+          img.src = file.url;
+          img.alt = file.name;
+          card.appendChild(img);
+        } else {
+          const video = document.createElement('video');
+          video.src = file.url;
+          video.controls = true;
+          video.preload = 'metadata';
+          card.appendChild(video);
+        }
+
+        card.appendChild(label);
+        grid.appendChild(card);
+      });
+    }
+
+    loadFiles();
+    setInterval(loadFiles, 4000);
+  </script>
+</body>
+</html>
